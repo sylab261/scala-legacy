@@ -210,7 +210,7 @@ public class ByteVector {
     public ByteVector putUTF8(final String s) {
         int charLength = s.length();
         if (charLength > 65535) {
-            throw new IllegalArgumentException("Maximum String literal length exceeded");
+            throw new IllegalArgumentException();
         }
         int len = length;
         if (len + 2 + charLength > data.length) {

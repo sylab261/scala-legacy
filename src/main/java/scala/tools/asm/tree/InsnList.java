@@ -176,9 +176,6 @@ public class InsnList {
     /**
      * Returns an iterator over the instructions in this list.
      *
-     * @param index
-     *            index of instruction for the iterator to start at
-     *
      * @return an iterator over the instructions in this list.
      */
     @SuppressWarnings("unchecked")
@@ -613,28 +610,14 @@ public class InsnList {
         }
 
         public void add(Object o) {
-            if (next != null) {
-                InsnList.this.insertBefore(next, (AbstractInsnNode) o);
-            } else if (prev != null) {
-                InsnList.this.insert(prev, (AbstractInsnNode) o);
-            } else {
-                InsnList.this.add((AbstractInsnNode) o);
-            }
+            InsnList.this.insertBefore(next, (AbstractInsnNode) o);
             prev = (AbstractInsnNode) o;
             remove = null;
         }
 
         public void set(Object o) {
-            if (remove != null) {
-                InsnList.this.set(remove, (AbstractInsnNode) o);
-                if (remove == prev) {
-                    prev = (AbstractInsnNode) o;
-                } else {
-                    next = (AbstractInsnNode) o;
-                }
-            } else {
-                throw new IllegalStateException();
-            }
+            InsnList.this.set(next.prev, (AbstractInsnNode) o);
+            prev = (AbstractInsnNode) o;
         }
     }
 }

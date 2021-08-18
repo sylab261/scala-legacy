@@ -41,7 +41,7 @@ import scala.tools.asm.signature.SignatureVisitor;
  */
 public final class TraceSignatureVisitor extends SignatureVisitor {
 
-    private final StringBuilder declaration;
+    private final StringBuffer declaration;
 
     private boolean isInterface;
 
@@ -53,9 +53,9 @@ public final class TraceSignatureVisitor extends SignatureVisitor {
 
     private boolean seenInterface;
 
-    private StringBuilder returnType;
+    private StringBuffer returnType;
 
-    private StringBuilder exceptions;
+    private StringBuffer exceptions;
 
     /**
      * Stack used to keep track of class types that have arguments. Each element
@@ -77,10 +77,10 @@ public final class TraceSignatureVisitor extends SignatureVisitor {
     public TraceSignatureVisitor(final int access) {
         super(Opcodes.ASM5);
         isInterface = (access & Opcodes.ACC_INTERFACE) != 0;
-        this.declaration = new StringBuilder();
+        this.declaration = new StringBuffer();
     }
 
-    private TraceSignatureVisitor(final StringBuilder buf) {
+    private TraceSignatureVisitor(final StringBuffer buf) {
         super(Opcodes.ASM5);
         this.declaration = buf;
     }
@@ -146,14 +146,14 @@ public final class TraceSignatureVisitor extends SignatureVisitor {
             declaration.append('(');
         }
         declaration.append(')');
-        returnType = new StringBuilder();
+        returnType = new StringBuffer();
         return new TraceSignatureVisitor(returnType);
     }
 
     @Override
     public SignatureVisitor visitExceptionType() {
         if (exceptions == null) {
-            exceptions = new StringBuilder();
+            exceptions = new StringBuffer();
         } else {
             exceptions.append(", ");
         }

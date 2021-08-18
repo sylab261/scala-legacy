@@ -40,9 +40,9 @@ import scala.tools.asm.Opcodes;
 public class SignatureWriter extends SignatureVisitor {
 
     /**
-     * Builder used to construct the signature.
+     * Buffer used to construct the signature.
      */
-    private final StringBuilder buf = new StringBuilder();
+    private final StringBuffer buf = new StringBuffer();
 
     /**
      * Indicates if the signature contains formal type parameters.
